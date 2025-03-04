@@ -90,4 +90,11 @@ public class ElementHelper {
         waitForVisible(element);
         Assert.assertTrue(element.getText().contains(value));
     }
+
+    public void validateSizeList(By locator, int expectedSize) {
+        waitForPresenceList(locator);
+        List<WebElement> initialList = driver.findElements(locator);
+        int initialTableSize = initialList.size();
+        Assert.assertEquals(initialTableSize, expectedSize, "Dimensiunea listei nu este " + expectedSize);
+    }
 }

@@ -23,10 +23,9 @@ public class WebTablesTest extends SharedData {
 
 
         //Identificam o lista de elemente
-        List<WebElement> initialTableElement = getDriver().findElements(By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[@class='rt-tr -odd' or @class='rt-tr -even']"));
-        int initialTableSize = initialTableElement.size();
+        By initialTableElement = By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[@class='rt-tr -odd' or @class='rt-tr -even']");
         int expectedTableSize = 3;
-        Assert.assertEquals(initialTableSize, expectedTableSize, "Dimensiunea initiala a tabelului nu este 3.");
+        elementHelper.validateSizeList(initialTableElement, expectedTableSize);
 
         //Identificam un element
         By addElement = By.id("addNewRecordButton");
@@ -61,11 +60,12 @@ public class WebTablesTest extends SharedData {
         elementHelper.clickLocator(submitElement);
 
         //Validam ca avem 4 randuri in tabel
-        List<WebElement> addTableElement = getDriver().findElements(By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[@class='rt-tr -odd' or @class='rt-tr -even']"));
-        Assert.assertEquals(addTableElement.size(), 4, "Dimensiunea initiala a tabelului nu este 4.");
+        By addTableElement = By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[@class='rt-tr -odd' or @class='rt-tr -even']");
+        elementHelper.validateSizeList(addTableElement, 4);
 
         //Validam continutul tabelului
-        String rowText = addTableElement.get(3).getText();
+        List<WebElement> addTableElementList = getDriver().findElements(By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[@class='rt-tr -odd' or @class='rt-tr -even']"));
+        String rowText = addTableElementList.get(3).getText();
         Assert.assertTrue(rowText.contains(firstNameValue));
         Assert.assertTrue(rowText.contains(lastNameValue));
         Assert.assertTrue(rowText.contains(emailValue));
@@ -94,11 +94,13 @@ public class WebTablesTest extends SharedData {
         elementHelper.clickLocator(submitChangedElement);
 
         //Validam valorile modificate
-        List<WebElement> editTableElement = getDriver().findElements(By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[@class='rt-tr -odd' or @class='rt-tr -even']"));
-        Assert.assertEquals(editTableElement.size(), 4, "Dimensiunea initiala a tabelului nu este 4.");
+        By editTableElement = By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[@class='rt-tr -odd' or @class='rt-tr -even']");
+        elementHelper.validateSizeList(editTableElement, 4);
+
 
         //Validam continutul tabelului
-        String editRowText = editTableElement.get(3).getText();
+        List<WebElement> editTableElementList = getDriver().findElements(By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[@class='rt-tr -odd' or @class='rt-tr -even']"));
+        String editRowText = editTableElementList.get(3).getText();
         Assert.assertTrue(editRowText.contains(firstNameValue));
         Assert.assertTrue(editRowText.contains(lastNameValue));
         Assert.assertTrue(editRowText.contains(emailChangedValue));
@@ -110,8 +112,8 @@ public class WebTablesTest extends SharedData {
         By deleteElement = By.id("delete-record-4");
         elementHelper.clickLocator(deleteElement);
 
-        List<WebElement> deleteTableElement = getDriver().findElements(By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[@class='rt-tr -odd' or @class='rt-tr -even']"));
-        Assert.assertEquals(deleteTableElement.size(), 3, "Dimensiunea initiala a tabelului nu este 4.");
+        By deleteTableElement = By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[@class='rt-tr -odd' or @class='rt-tr -even']");
+        elementHelper.validateSizeList(deleteTableElement, 3);
     }
 
 }
