@@ -1,5 +1,7 @@
 package tests;
 
+import helperMethods.ElementHelper;
+import helperMethods.TabHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -13,38 +15,31 @@ public class WindowTest extends SharedData{
     @Test
     public void testMethod() {
 
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        WebElement alertsMenu = getDriver().findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        js.executeScript("arguments[0].click();", alertsMenu);
+        ElementHelper elementHelper = new ElementHelper(getDriver());
+        TabHelper tabHelper = new TabHelper(getDriver());
 
+        By alertsMenu = By.xpath("//h5[text()='Alerts, Frame & Windows']");
+        elementHelper.clickLocator(alertsMenu);
 
-        WebElement browserWindowPage = getDriver().findElement(By.xpath("//span[text()='Browser Windows']"));
-        js.executeScript("arguments[0].click();", browserWindowPage);
+        By browserWindowPage = By.xpath("//span[text()='Browser Windows']");
+        elementHelper.clickJsLocator(browserWindowPage);
 
-        browserWindow();
-    }
-
-    public void browserWindow() {
         //NewTab
-        WebElement newTabElement = getDriver().findElement(By.id("tabButton"));
-        newTabElement.click();
+        By newTabElement = By.id("tabButton");
+        elementHelper.clickLocator(newTabElement);
         System.out.println("URL-ul curent este: " + getDriver().getCurrentUrl());
 
-        List<String> tabs = new ArrayList<>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(tabs.get(1));
-        System.out.println("URL-ul curent este: " + getDriver().getCurrentUrl());
-        getDriver().close();
-        getDriver().switchTo().window(tabs.get(0));
+        tabHelper.switchToSpecificTab(1);
+        tabHelper.closeCurrentTab();
+        tabHelper.switchToSpecificTab(0);
 
         //NewWindow
-        WebElement newWindowElement = getDriver().findElement(By.id("windowButton"));
-        newWindowElement.click();
+        By newWindowElement = By.id("windowButton");
+        elementHelper.clickLocator(newWindowElement);
         System.out.println("URL-ul curent este: " + getDriver().getCurrentUrl());
 
-        List<String> windows = new ArrayList<>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(windows.get(1));
-        System.out.println("URL-ul curent este: " + getDriver().getCurrentUrl());
-        getDriver().close();
-        getDriver().switchTo().window(tabs.get(0));
+        tabHelper.switchToSpecificTab(1);
+        tabHelper.closeCurrentTab();
+        tabHelper.switchToSpecificTab(0);
     }
 }
