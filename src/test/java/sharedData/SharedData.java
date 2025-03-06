@@ -18,10 +18,10 @@ public class SharedData {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-//    @AfterMethod
-//    public void clearEnvironment() {
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void clearEnvironment() {
+        driver.quit();
+    }
 
     public WebDriver getDriver() {
         return driver;
