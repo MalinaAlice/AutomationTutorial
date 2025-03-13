@@ -34,5 +34,7 @@ public class TestGoogleSearch {
         String searchValue = "Youtube.com";
         searchElement.sendKeys(searchValue);
         searchElement.sendKeys(Keys.ENTER);
+
+        driver.quit();
     }
 }
