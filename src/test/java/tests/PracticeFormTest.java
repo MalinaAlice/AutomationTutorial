@@ -28,7 +28,6 @@ public class PracticeFormTest extends SharedData {
         List<String> subjectValues = Arrays.asList("Maths", "Arts", "Computer Science");
         List<String> hobbyValues = Arrays.asList("Reading", "Music");
         String chooseFilePicture = "src/test/resources/poza-cv1.jpeg";
-        File file = new File (chooseFilePicture);
         String currentAddressValue = "Str. X, Buc., Sect.4";
         String chooseStateValue = "Haryana";
         String chooseCityValue = "Panipat";

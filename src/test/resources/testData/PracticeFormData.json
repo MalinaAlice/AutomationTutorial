@@ -1,0 +1,14 @@
+{
+  "firstNameValue": "Alice",
+  "lastNameValue": "Malina",
+  "emailValue": "alice@email.com",
+  "genderValue": "Female",
+  "mobileNumberValue": "0762569871",
+  "subjectValues": ["Maths", "Arts", "Computer Science"],
+  "hobbyValues": ["Reading", "Music"],
+  "chooseFilePicture": "src/test/resources/poza-cv1.jpeg",
+  "currentAddressValue": "Str. X, Buc., Sect.4",
+  "chooseStateValue": "Haryana",
+  "chooseCityValue": "Panipat",
+  "expectedMessage": "Thanks for submitting the form"
+}
