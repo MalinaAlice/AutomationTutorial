@@ -1,5 +1,9 @@
 package modelObject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class PracticeFormModel {
@@ -17,6 +21,14 @@ public class PracticeFormModel {
     private String chooseCityValue;
     private String expectedMessage;
 
+    public PracticeFormModel(String jsonFilePath) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            objectMapper.readerForUpdating(this).readValue(new File(jsonFilePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load JSON file: " + jsonFilePath, e);
+        }
+    }
 
     public String getFirstNameValue() {
         return firstNameValue;

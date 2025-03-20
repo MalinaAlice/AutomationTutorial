@@ -1,5 +1,6 @@
 package tests;
 
+import modelObject.AlertModel;
 import org.testng.annotations.Test;
 import pages.AlertPage;
 import pages.IndexPage;
@@ -9,6 +10,8 @@ public class AlertTest extends SharedData {
 
     @Test
     public void testMethod() {
+
+        AlertModel testData = new AlertModel("src/test/resources/testData/AlertData.json");
 
         IndexPage indexPage = new IndexPage(getDriver());
         indexPage.clickOnAlertWindowFrameMenu();
@@ -25,6 +28,6 @@ public class AlertTest extends SharedData {
         alertPage.interactWithCancelAlert();
 
         //Name Alert
-        alertPage.interactWithValueAlert("Alice");
+        alertPage.interactWithValueAlert(testData);
     }
 }

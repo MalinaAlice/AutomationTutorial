@@ -1,5 +1,6 @@
 package pages;
 
+import modelObject.WebTablesModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -14,52 +15,51 @@ public class WebTablesPage extends BasePage{
     }
 
 
-    public void addNewEntry(String firstNameValue, String lastNameValue, String emailValue, String ageValue,
-                            String salaryValue, String departmentValue, int tableSize) {
+    public void addNewEntry(WebTablesModel testData) {
         elementHelper.clickLocator(WebTablesLocators.addElement);
-        elementHelper.fillLocator(WebTablesLocators.firstNameElement, firstNameValue);
-        elementHelper.fillLocator(WebTablesLocators.lastNameElement, lastNameValue);
-        elementHelper.fillLocator(WebTablesLocators.emailElement, emailValue);
-        elementHelper.fillLocator(WebTablesLocators.ageElement, ageValue);
-        elementHelper.fillLocator(WebTablesLocators.salaryElement, salaryValue);
-        elementHelper.fillLocator(WebTablesLocators.departmentElement, departmentValue);
+        elementHelper.fillLocator(WebTablesLocators.firstNameElement, testData.getFirstnameValue());
+        elementHelper.fillLocator(WebTablesLocators.lastNameElement, testData.getLastNameValue());
+        elementHelper.fillLocator(WebTablesLocators.emailElement, testData.getEmailValue());
+        elementHelper.fillLocator(WebTablesLocators.ageElement, testData.getAgeValue());
+        elementHelper.fillLocator(WebTablesLocators.salaryElement, testData.getSalaryValue());
+        elementHelper.fillLocator(WebTablesLocators.departmentElement, testData.getDepartmentValue());
         elementHelper.clickLocator(WebTablesLocators.submitElement);
 
         //Validam ca avem 4 randuri in tabel
-        elementHelper.validateSizeList(WebTablesLocators.addTableElement, tableSize);
+        elementHelper.validateSizeList(WebTablesLocators.addTableElement, testData.getNewTableSize());
 
         //Validam continutul tabelului
         List<WebElement> addTableElementList = driver.findElements(WebTablesLocators.addTableElement);
-        String rowText = addTableElementList.get(tableSize-1).getText();
-        Assert.assertTrue(rowText.contains(firstNameValue));
-        Assert.assertTrue(rowText.contains(lastNameValue));
-        Assert.assertTrue(rowText.contains(emailValue));
-        Assert.assertTrue(rowText.contains(ageValue));
-        Assert.assertTrue(rowText.contains(salaryValue));
-        Assert.assertTrue(rowText.contains(departmentValue));
+        String rowText = addTableElementList.get(testData.getNewTableSize()-1).getText();
+        Assert.assertTrue(rowText.contains(testData.getFirstnameValue()));
+        Assert.assertTrue(rowText.contains(testData.getLastNameValue()));
+        Assert.assertTrue(rowText.contains(testData.getEmailValue()));
+        Assert.assertTrue(rowText.contains(testData.getAgeValue()));
+        Assert.assertTrue(rowText.contains(testData.getSalaryValue()));
+        Assert.assertTrue(rowText.contains(testData.getDepartmentValue()));
     }
 
-    public void editNewEntry(String salaryChangedValue,  String departmentChangedValue, String emailChangedValue, int tableSize) {
+    public void editNewEntry(WebTablesModel testData) {
         //Edit Functionality
         elementHelper.clickLocator(WebTablesLocators.editElement);
-        elementHelper.changeValue(WebTablesLocators.salaryChangedElement, salaryChangedValue);
-        elementHelper.changeValue(WebTablesLocators.departmentChangedElement, departmentChangedValue);
-        elementHelper.changeValue(WebTablesLocators.emailChangedElement, emailChangedValue);
+        elementHelper.changeValue(WebTablesLocators.salaryChangedElement, testData.getSalaryChangedValue());
+        elementHelper.changeValue(WebTablesLocators.departmentChangedElement, testData.getDepartmentChangedValue());
+        elementHelper.changeValue(WebTablesLocators.emailChangedElement, testData.getEmailChangedValue());
         elementHelper.clickLocator(WebTablesLocators.submitChangedElement);
         //Validam valorile modificate
-        elementHelper.validateSizeList(WebTablesLocators.editTableElement, tableSize);
+        elementHelper.validateSizeList(WebTablesLocators.editTableElement, testData.getNewTableSize());
         //Validam continutul tabelului
         List<WebElement> editTableElementList = driver.findElements(WebTablesLocators.editTableElement);
-        String editRowText = editTableElementList.get(tableSize-1).getText();
-        Assert.assertTrue(editRowText.contains(emailChangedValue));
-        Assert.assertTrue(editRowText.contains(salaryChangedValue));
-        Assert.assertTrue(editRowText.contains(departmentChangedValue));
+        String editRowText = editTableElementList.get(testData.getNewTableSize()-1).getText();
+        Assert.assertTrue(editRowText.contains(testData.getEmailChangedValue()));
+        Assert.assertTrue(editRowText.contains(testData.getSalaryChangedValue()));
+        Assert.assertTrue(editRowText.contains(testData.getDepartmentChangedValue()));
     }
 
-    public void deleteNewEntry(int tableSize) {
+    public void deleteNewEntry(WebTablesModel testData) {
         //Delete information
         elementHelper.clickLocator(WebTablesLocators.deleteElement);
-        elementHelper.validateSizeList(WebTablesLocators.deleteTableElement, tableSize);
+        elementHelper.validateSizeList(WebTablesLocators.deleteTableElement, testData.getActualTableSize());
     }
 
 }

@@ -1,0 +1,13 @@
+{
+  "firstnameValue": "Alice",
+  "lastNameValue": "Malina",
+  "emailValue": "alice.email@gmail.com",
+  "ageValue": "24",
+  "salaryValue": "5500",
+  "departmentValue": "Quality Assurance",
+  "salaryChangedValue": "6000",
+  "departmentChangedValue": "QA Automation",
+  "emailChangedValue": "alice.email18@gmail.com",
+  "newTableSize": 4,
+  "actualTableSize": 3
+}
