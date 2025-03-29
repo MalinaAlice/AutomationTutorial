@@ -1,5 +1,6 @@
 package sharedData;
 
+import loggerUtility.LoggerUtility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -9,9 +10,13 @@ import java.time.Duration;
 
 public class SharedData {
     private WebDriver driver;
+    private String testName;
 
     @BeforeMethod
     public void prepareEnvironment() {
+        testName = this.getClass().getSimpleName();
+        LoggerUtility.startTest(testName);
+
         driver = new ChromeDriver();
         driver.get("https://demoqa.com/");
         driver.manage().window().maximize();
@@ -21,6 +26,7 @@ public class SharedData {
     @AfterMethod
     public void clearEnvironment() {
         driver.quit();
+        LoggerUtility.finishTest(testName);
     }
 
     public WebDriver getDriver() {
