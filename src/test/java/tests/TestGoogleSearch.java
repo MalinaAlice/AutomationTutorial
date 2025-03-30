@@ -3,7 +3,11 @@ package tests;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class TestGoogleSearch {
     public WebDriver driver;
@@ -24,6 +28,9 @@ public class TestGoogleSearch {
         driver.manage().window().maximize();
 
         //Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("W0wltc")));
+
         WebElement respingeTot = driver.findElement(By.id("W0wltc"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", respingeTot);
