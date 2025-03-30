@@ -19,7 +19,7 @@ public class TestGoogleSearch {
 
     public void searchGoogle() throws InterruptedException {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new");
+        //options.addArguments("--headless=new");
         options.addArguments("--disable-blink-features=AutomationControlled");
         options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
 
@@ -28,10 +28,10 @@ public class TestGoogleSearch {
         driver.manage().window().maximize();
 
         //Thread.sleep(2000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("W0wltc")));
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("W0wltc")));
 
-        WebElement respingeTot = driver.findElement(By.id("W0wltc"));
+        WebElement respingeTot = driver.findElement(By.xpath("//div[text()='Respinge tot']"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", respingeTot);
         //respingeTot.click();
