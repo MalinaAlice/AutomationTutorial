@@ -3,6 +3,7 @@ package sharedData;
 import loggerUtility.LoggerUtility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -15,12 +16,14 @@ public class SharedData {
     @BeforeMethod (alwaysRun = true)
     public void prepareEnvironment() {
         testName = this.getClass().getSimpleName();
-        LoggerUtility.startTest(testName);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");
 
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.get("https://demoqa.com/");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        LoggerUtility.startTest(testName);
     }
 
     @AfterMethod (alwaysRun = true)
