@@ -5,10 +5,12 @@ import org.testng.annotations.Test;
 import pages.IndexPage;
 import pages.WebTablesPage;
 import sharedData.SharedData;
+import suites.TestCaseSuite;
+import suites.TestSuite;
 
 public class WebTablesTest extends SharedData {
-    @Test
-    public void metodaTest () {
+    @Test (groups = {TestSuite.REGRESSION_SUITE, TestSuite.ELEMENTS_SUITE, TestCaseSuite.TICKET_123, TestCaseSuite.TC_459})
+    public void testMethod () {
 
         WebTablesModel testData = new WebTablesModel("src/test/resources/testData/WebTablesData.json");
 
