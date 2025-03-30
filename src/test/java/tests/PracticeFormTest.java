@@ -9,7 +9,7 @@ import sharedData.SharedData;
 public class PracticeFormTest extends SharedData {
 
     @Test
-    public void metodaTest () {
+    public void testMethod () {
 
         PracticeFormModel testData = new PracticeFormModel("src/test/resources/testData/PracticeFormData.json");
 
