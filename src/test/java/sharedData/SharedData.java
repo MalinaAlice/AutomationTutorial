@@ -12,7 +12,7 @@ public class SharedData {
     private WebDriver driver;
     private String testName;
 
-    @BeforeMethod
+    @BeforeMethod (alwaysRun = true)
     public void prepareEnvironment() {
         testName = this.getClass().getSimpleName();
         LoggerUtility.startTest(testName);
@@ -23,7 +23,7 @@ public class SharedData {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @AfterMethod
+    @AfterMethod (alwaysRun = true)
     public void clearEnvironment() {
         driver.quit();
         LoggerUtility.finishTest(testName);
